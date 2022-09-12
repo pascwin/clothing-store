@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Navigation from "./routes/Navigation/Navigation";
 import Home from "./routes/Home/Home";
-import SignIn from "./routes/SignIn/SignIn";
+import Authentication from "./routes/Authentication/Authentication";
 
 const Shop = () => {
   return <h1>Shop</h1>;
@@ -17,7 +17,7 @@ const App = () => {
         <Route index element={<Home />} />
         {/* nested Routes need match of parent path + own path */}
         <Route path="shop" element={<Shop />} />
-        <Route path="sign-in" element={<SignIn />} />
+        <Route path="sign-in" element={<Authentication/>} />
       </Route>
     </Routes>
   );

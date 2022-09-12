@@ -25,8 +25,6 @@ const SignUpForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  console.log(formFields);
-
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
@@ -94,7 +92,9 @@ const SignUpForm = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
-        <Button buttonType="inverted" type="submit">Sign Up</Button>
+        <Button buttonType="inverted" type="submit">
+          Sign Up
+        </Button>
       </form>
     </div>
   );

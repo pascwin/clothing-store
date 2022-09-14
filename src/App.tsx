@@ -4,6 +4,7 @@ import Navigation from "./routes/Navigation/Navigation";
 import Home from "./routes/Home/Home";
 import Authentication from "./routes/Authentication/Authentication";
 import Shop from "./components/Shop/Shop";
+import Checkout from "./routes/Checkout/Checkout";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         {/* nested Routes need match of parent path + own path */}
         <Route path="shop" element={<Shop />} />
         <Route path="auth" element={<Authentication/>} />
+        <Route path="checkout" element={<Checkout/>} />
       </Route>
     </Routes>
   );

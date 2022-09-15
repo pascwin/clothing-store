@@ -11,7 +11,16 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
@@ -25,6 +34,39 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 initializeApp(firebaseConfig);
+
+export const addCollectionsAndDocuments = async (
+  collectionKey: any,
+  objectsToAdd: any
+) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object: any) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+
+  await batch.commit();
+  console.log("done");
+};
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, "categories");
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const categoryMap = querySnapshot.docs.reduce(
+    (acc: any, docSnapshot: any) => {
+      const { title, items } = docSnapshot.data();
+      acc[title.toLowerCase()] = items;
+      return acc;
+    },
+    {}
+  );
+
+  return categoryMap;
+};
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -47,7 +89,7 @@ export const createUserDocumentFromAuth = async (
 ) => {
   if (!userAuth) return;
 
-  const userDocRef = doc(db, 'users', userAuth.uid);
+  const userDocRef = doc(db, "users", userAuth.uid);
 
   const userSnapshot = await getDoc(userDocRef);
 
@@ -63,7 +105,7 @@ export const createUserDocumentFromAuth = async (
         ...additionalInformation,
       });
     } catch (error: any) {
-      console.log('error creating the user', error.message);
+      console.log("error creating the user", error.message);
     }
   }
 

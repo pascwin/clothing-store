@@ -3,7 +3,7 @@ import "./index.scss";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./contexts/user-context";
-import { ProductProvider } from "./contexts/product-context";
+import { CategoriesProvider } from "./contexts/categories-context";
 import { CartProvider } from "./contexts/cart-context";
 
 const root = ReactDOM.createRoot(
@@ -12,11 +12,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <BrowserRouter>
     <UserProvider>
-      <ProductProvider>
+      <CategoriesProvider>
         <CartProvider>
           <App />
         </CartProvider>
-      </ProductProvider>
+      </CategoriesProvider>
     </UserProvider>
   </BrowserRouter>
 );

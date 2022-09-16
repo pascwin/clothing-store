@@ -14,7 +14,7 @@ const App = () => {
         {/* beside index there mustn't be defined a path in the Route */}
         <Route index element={<Home />} />
         {/* nested Routes need match of parent path + own path */}
-        <Route path="shop" element={<Shop />} />
+        <Route path="shop/*" element={<Shop />} />
         <Route path="auth" element={<Authentication/>} />
         <Route path="checkout" element={<Checkout/>} />
       </Route>
